@@ -8,6 +8,8 @@ import mx.ipn.upiicsa.web.ejemplo03.contacts.bs.entity.Contact;
 @Builder
 @Setter
 @Getter
+@lombok.NoArgsConstructor
+@lombok.AllArgsConstructor
 public class ContactDto {
     private Integer id;
     private Integer idUser;

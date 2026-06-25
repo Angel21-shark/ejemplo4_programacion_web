@@ -2,37 +2,51 @@
 <html xmlns:th="http://thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inicio - Mi Proyecto MVC</title>
+    <title>Editar Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-<h1>Editar usuario</h1>
-
-<!-- Thymeleaf reemplaza este texto con el valor de la variable 'mensaje' -->
-
-<form th:action="@{/users/{id}(id=${id})}" th:object="${userDto}" method="POST" th:method="PUT">
-    <div>
-        <label>Nombre:</label>
-        <input type="text" th:field="*{name}" />
-        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></p>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        <h4 class="mb-0">Editar Contacto</h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/contacts/save}" th:object="${contact}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+                            
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nombre *</label>
+                                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Primer Apellido *</label>
+                                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="secondLastName" class="form-label">Segundo Apellido (opcional)</label>
+                                <input type="text" class="form-control" id="secondLastName" th:field="*{secondLastName}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="nickName" class="form-label">Apodo (opcional)</label>
+                                <input type="text" class="form-control" id="nickName" th:field="*{nickName}">
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/contacts}" class="btn btn-secondary">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label>Primer apellido:</label>
-        <input type="text" th:field="*{lastName}" />
-        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color:red;"></p>
-    </div>
-    <div>
-        <label>Segundo apellido:</label>
-        <input type="text" th:field="*{secondLastName}" />
-        <p th:if="${#fields.hasErrors('secondLastName')}" th:errors="*{secondLastName}" style="color:red;"></p>
-    </div>
-    <div>
-        <label>Usuario:</label>
-        <input type="text" th:field="*{username}" />
-        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red;"></p>
-    </div>
-    <br>
-    <button type="submit">Enviar</button>
-</form>
-<a th:href="@{/users}">Regresar</a>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/contacts.js}"></script>
 </body>
 </html>

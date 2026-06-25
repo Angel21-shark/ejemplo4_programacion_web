@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Mi Proyecto MVC</title>
+</head>
+<body>
+<h1>Gestión de contactos</h1>
+<table>
+    <thead>
+    <tr>
+        <!--<th>ID</th>-->
+        <th>Nombre</th>
+        <th>Primer Apellido</th>
+        <th>Segundo Apellido</th>
+        <th>Usuario (Username)</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- th:each se encarga de repetir este <tr> por cada contacto en la lista -->
+    <tr th:each="contact : ${contacts}">
+        <!--<td th:text="${contacto.id}">1</td>-->
+        <td th:text="${contact.name}">Juan</td>
+        <td th:text="${contact.lastName}">Pérez</td>
+        <td th:text="${contact.secondLastName}">Gómez</td>
+        <td th:text="${contact.nickName}">juanpg</td>
+        <td><a th:href="@{/users/{id}/edit(id=${contact.id})}">Editar</a><a th:href="@{/users/{id}/destroy(id=${contact.id})}">Eliminar</a></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/register/new}">Registrarte</a>
+</body>
+</html>

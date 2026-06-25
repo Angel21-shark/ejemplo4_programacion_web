@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Mi Proyecto MVC</title>
+</head>
+<body>
+<h1>Editar usuario</h1>
+
+<!-- Thymeleaf reemplaza este texto con el valor de la variable 'mensaje' -->
+
+<form th:action="@{/users/{id}(id=${id})}" th:object="${userDto}" method="POST" th:method="DELETE">
+    <div>
+        <label>Nombre:</label>
+        <span th:text="*{name}" />
+    </div>
+    <div>
+        <label>Primer apellido:</label>
+        <span th:text="*{lastName}" />
+    </div>
+    <div>
+        <label>Segundo apellido:</label>
+        <span th:text="*{secondLastName}" />
+    </div>
+    <div>
+        <label>Usuario:</label>
+        <span th:text="*{username}" />
+    </div>
+    <br>
+    <button type="submit">Enviar</button>
+</form>
+<a th:href="@{/users}">Regresar</a>
+</body>
+</html>

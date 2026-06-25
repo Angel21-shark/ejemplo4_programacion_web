@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Mi Proyecto MVC</title>
+</head>
+<body>
+<h1>Editar usuario</h1>
+
+<!-- Thymeleaf reemplaza este texto con el valor de la variable 'mensaje' -->
+
+<form th:action="@{/users/{id}(id=${id})}" th:object="${userDto}" method="POST" th:method="PUT">
+    <div>
+        <label>Nombre:</label>
+        <input type="text" th:field="*{name}" />
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></p>
+    </div>
+    <div>
+        <label>Primer apellido:</label>
+        <input type="text" th:field="*{lastName}" />
+        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color:red;"></p>
+    </div>
+    <div>
+        <label>Segundo apellido:</label>
+        <input type="text" th:field="*{secondLastName}" />
+        <p th:if="${#fields.hasErrors('secondLastName')}" th:errors="*{secondLastName}" style="color:red;"></p>
+    </div>
+    <div>
+        <label>Usuario:</label>
+        <input type="text" th:field="*{username}" />
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red;"></p>
+    </div>
+    <br>
+    <button type="submit">Enviar</button>
+</form>
+<a th:href="@{/users}">Regresar</a>
+</body>
+</html>

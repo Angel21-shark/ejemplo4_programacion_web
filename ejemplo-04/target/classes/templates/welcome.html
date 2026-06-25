@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+</head>
+<body>
+<p th:text="${resultado}"></p>
+<label>---</label>
+<div th:if="${session.usuarioSesion != null}">
+    <h1>¡Bienvenido, <span th:text="${session.usuarioSesion.username}">Usuario</span>!</h1>
+</div>
+<label>---</label>
+<a th:href="@{/users}">Gestionar usuarios</a><br/>
+<a th:href="@{/logout}">Cerrar sesion</a><br/>
+<a th:href="@{/contacts}">Contactos</a><br/>
+</body>
+</html>

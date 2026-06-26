@@ -30,18 +30,20 @@ public class ContactsCrtl {
      *
      * @param model   modelo para pasar datos a la vista Thymeleaf
      * @param session sesión HTTP actual para validar la autenticación
-     * @return la plantilla de la lista de contactos o redirección al inicio si no hay sesión
+     * @return la plantilla de la lista de contactos o redirección al inicio si no
+     *         hay sesión
      */
     @GetMapping
     public String getAll(Model model, HttpSession session) {
         var user = (User) session.getAttribute("usuarioSesion");
-        if(user == null) return "redirect:/";
-        
+        if (user == null)
+            return "redirect:/";
+
         List<Contact> contacts = contactsBs.getContacts(user.getId());
         List<ContactDto> contactDtos = contacts.stream()
                 .map(ContactDto::fromEntity)
                 .collect(Collectors.toList());
-                
+
         model.addAttribute("contacts", contactDtos);
         return "contacts/index";
     }
@@ -55,7 +57,8 @@ public class ContactsCrtl {
      */
     @GetMapping("/new")
     public String showNewForm(Model model, HttpSession session) {
-        if(session.getAttribute("usuarioSesion") == null) return "redirect:/";
+        if (session.getAttribute("usuarioSesion") == null)
+            return "redirect:/";
         model.addAttribute("contact", new ContactDto());
         return "contacts/new";
     }
@@ -63,15 +66,18 @@ public class ContactsCrtl {
     /**
      * Procesa la solicitud POST para guardar un contacto (nuevo o editado).
      *
-     * @param contactDto         el DTO con los datos del contacto provenientes del formulario
+     * @param contactDto         el DTO con los datos del contacto provenientes del
+     *                           formulario
      * @param session            sesión HTTP actual para recuperar el propietario
      * @param redirectAttributes atributos para mostrar mensajes flash de éxito
      * @return redirección a la lista de contactos
      */
     @PostMapping("/save")
-    public String saveContact(@ModelAttribute ContactDto contactDto, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String saveContact(@ModelAttribute ContactDto contactDto, HttpSession session,
+            RedirectAttributes redirectAttributes) {
         var user = (User) session.getAttribute("usuarioSesion");
-        if(user == null) return "redirect:/";
+        if (user == null)
+            return "redirect:/";
 
         Contact contact = Contact.builder()
                 .id(contactDto.getId())
@@ -81,7 +87,7 @@ public class ContactsCrtl {
                 .secondLastName(contactDto.getSecondLastName())
                 .nickName(contactDto.getNickName())
                 .build();
-                
+
         contactsBs.saveContact(contact);
         redirectAttributes.addFlashAttribute("mensaje", "Contacto guardado exitosamente");
         return "redirect:/contacts";
@@ -94,18 +100,20 @@ public class ContactsCrtl {
      * @param id      el identificador del contacto a editar
      * @param model   modelo para enviar el DTO a la vista
      * @param session sesión HTTP actual
-     * @return la plantilla de edición o redirección si hay intento de acceso indebido
+     * @return la plantilla de edición o redirección si hay intento de acceso
+     *         indebido
      */
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable("id") Integer id, Model model, HttpSession session) {
         var user = (User) session.getAttribute("usuarioSesion");
-        if(user == null) return "redirect:/";
+        if (user == null)
+            return "redirect:/";
 
         Contact contact = contactsBs.getContactById(id);
         if (contact == null || !contact.getIdUser().equals(user.getId())) {
             return "redirect:/contacts"; // Protege contra acceso a contactos ajenos
         }
-        
+
         model.addAttribute("contact", ContactDto.fromEntity(contact));
         return "contacts/edit";
     }
@@ -115,13 +123,16 @@ public class ContactsCrtl {
      *
      * @param id                 el identificador del contacto a eliminar
      * @param session            sesión HTTP actual
-     * @param redirectAttributes atributos para mostrar mensajes flash de confirmación
+     * @param redirectAttributes atributos para mostrar mensajes flash de
+     *                           confirmación
      * @return redirección a la lista de contactos
      */
     @PostMapping("/{id}/delete")
-    public String deleteContact(@PathVariable("id") Integer id, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String deleteContact(@PathVariable("id") Integer id, HttpSession session,
+            RedirectAttributes redirectAttributes) {
         var user = (User) session.getAttribute("usuarioSesion");
-        if(user == null) return "redirect:/";
+        if (user == null)
+            return "redirect:/";
 
         Contact contact = contactsBs.getContactById(id);
         if (contact != null && contact.getIdUser().equals(user.getId())) {

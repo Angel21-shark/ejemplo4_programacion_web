@@ -18,11 +18,10 @@ echo "⏳ Compilando y levantando servicios... (esto puede tardar unos 10-15 seg
 sleep 15
 
 echo "🌐 Abriendo la aplicación en tu navegador de Windows..."
-# En WSL, explorer.exe puede invocar URLs directamente en el navegador nativo
+# En WSL, explorer.exe puede invocar URLs directamente
 if command -v explorer.exe &> /dev/null; then
     explorer.exe "http://localhost:8080"
 else
-    # Por si acaso están usando un Linux puro en lugar de WSL
     xdg-open "http://localhost:8080" || echo "Abre http://localhost:8080 en tu navegador."
 fi
 

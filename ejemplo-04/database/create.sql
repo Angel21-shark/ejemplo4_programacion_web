@@ -5,3 +5,9 @@ CREATE TABLE tag03_medio_contacto (id_medio_contacto SERIAL NOT NULL, fk_id_cont
 ALTER TABLE tag02_contacto ADD CONSTRAINT FKtag02_cont548851 FOREIGN KEY (fk_id_usuario) REFERENCES tag01_usuario (id_usuario);
 ALTER TABLE tag03_medio_contacto ADD CONSTRAINT FKtag03_medi265747 FOREIGN KEY (fk_id_contacto) REFERENCES tag02_contacto (id_contacto);
 ALTER TABLE tag03_medio_contacto ADD CONSTRAINT FKtag03_medi581297 FOREIGN KEY (fk_id_tipo) REFERENCES cag01_tipo_contacto (id_tipo);
+
+-- Datos Semilla (Catálogos iniciales)
+INSERT INTO cag01_tipo_contacto (tx_nombre, tx_descripcion, st_activo) VALUES ('Teléfono', 'Número telefónico fijo o móvil', true);
+INSERT INTO cag01_tipo_contacto (tx_nombre, tx_descripcion, st_activo) VALUES ('Correo Electrónico', 'Dirección de email personal o de trabajo', true);
+INSERT INTO cag01_tipo_contacto (tx_nombre, tx_descripcion, st_activo) VALUES ('Red Social', 'Perfil de Facebook, Twitter, LinkedIn, etc.', true);
+INSERT INTO cag01_tipo_contacto (tx_nombre, tx_descripcion, st_activo) VALUES ('Sitio Web', 'Página web personal o portafolio', true);

@@ -16,14 +16,10 @@ public class LoginDao {
     UserJpaRepository userJpaRepository;
 
     public Optional<User> login(String username, String password) {
-        //Optional<UsuarioJpa> resultado = usuarioJpaRepository.findByUsernameAndPassword(username, password);
         //if (resultado.isPresent()) {
-        //    return Optional.of(resultado.get().toEntity());
         //} else {
-        //    return Optional.empty();
         //}
         var resultado = userJpaRepository.findByUsernameAndPassword(username, password);
-        //return resultado.map(usuarioJpa -> usuarioJpa.toEntity());
         return resultado.map(UserJpa::toEntity);
     }
 }

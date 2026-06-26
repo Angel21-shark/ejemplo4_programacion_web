@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Lógica de negocio (Service) para la gestión de Contactos.
+ * Maneja las reglas y sirve de puente entre los controladores y el DAO.
+ */
 @Slf4j
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -17,18 +21,41 @@ public class ContactsBs {
     @Autowired
     ContacsDao contacsDao;
 
+    /**
+     * Obtiene la lista de contactos asociados a un usuario específico.
+     *
+     * @param idUser el identificador del usuario propietario de los contactos
+     * @return lista de contactos pertenecientes al usuario
+     */
     public List<Contact> getContacts(Integer idUser) {
         return contacsDao.findAll(idUser);
     }
 
+    /**
+     * Guarda o actualiza un contacto en la base de datos.
+     *
+     * @param contact la información del contacto a guardar
+     * @return el contacto guardado y actualizado
+     */
     public Contact saveContact(Contact contact) {
         return contacsDao.save(contact);
     }
 
+    /**
+     * Busca un contacto específico a través de su identificador.
+     *
+     * @param idContacto el identificador único del contacto
+     * @return el contacto si se encuentra, o null si no existe
+     */
     public Contact getContactById(Integer idContacto) {
         return contacsDao.findById(idContacto).orElse(null);
     }
 
+    /**
+     * Elimina un contacto de forma permanente.
+     *
+     * @param idContacto el identificador del contacto a eliminar
+     */
     public void deleteContact(Integer idContacto) {
         contacsDao.delete(idContacto);
     }

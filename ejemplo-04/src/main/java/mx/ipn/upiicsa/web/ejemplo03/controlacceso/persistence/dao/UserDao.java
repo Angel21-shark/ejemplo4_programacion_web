@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Data Access Object (DAO) para la gestión de persistencia de usuarios.
+ * Utiliza Spring Data JPA y EntityManager para consultas nativas.
+ */
 @Slf4j
 @Repository
 public class UserDao {
@@ -25,38 +29,25 @@ public class UserDao {
     private static final String QUERY_FIND_ALL = "select * from usuario";
     private static final String QUERY_DELETE_BY_ID = "delete from usuario where id_usuario = :id";
 
+    /**
+     * Guarda un usuario en la base de datos.
+     * 
+     * @param user el usuario a guardar
+     * @return el usuario guardado y mapeado de vuelta a entidad de negocio
+     */
     public User save(User user) {
         log.info("Usuario DAO: {}",user.getPassword());
         var userSavedJpa = userJpaRepository.save(UserJpa.fromEntity(user));
         return userSavedJpa.toEntity();
     }
 
+    /**
+     * Recupera todos los usuarios utilizando una consulta nativa y los mapea
+     * utilizando objetos Tuple para evitar problemas de tipos de retorno genéricos.
+     *
+     * @return lista de usuarios recuperados de la base de datos
+     */
     public List<User> findAll() {
-        //var usuariosJpa = userJpaRepository.findAll();
-        //List<User> users = new ArrayList<>();
-        //for(UserJpa usuarioJpa: usuariosJpa) {
-        //    users.add(usuarioJpa.toEntity());
-        //}
-        //return users;
-        //return userJpaRepository
-        //        .findAll()
-        //        .stream()
-        //        .map(UserJpa::toEntity)
-        //        .toList();
-        //Query query = entityManager.createNativeQuery(QUERY_FIND_ALL);
-        //List<UserJpa> usersJpa = query.getResultList();
-        //return usersJpa.stream().map(UserJpa::toEntity).toList();
-        //Query query = entityManager.createNativeQuery(QUERY_FIND_ALL);
-        //List<Object[]> resultados = query.getResultList();
-        //return resultados.stream().map(row -> User.builder()
-        //            .id((Integer) row[0])
-        //            .name((String) row[1])
-        //            .lastName((String) row[2])
-        //            .secondLastName((String) row[3])
-        //            .username((String) row[4])
-        //            .password((String) row[5])
-        //            .build()
-        //).toList();
         Query query = entityManager.createNativeQuery(QUERY_FIND_ALL, Tuple.class);
         @SuppressWarnings("unchecked")
         List<Tuple> resultados = query.getResultList();
@@ -71,14 +62,22 @@ public class UserDao {
         ).toList();
     }
 
+    /**
+     * Busca un usuario específico por su ID.
+     *
+     * @param idUsuario el identificador del usuario
+     * @return un Optional conteniendo el usuario si se encuentra
+     */
     public Optional<User> findById(Integer idUsuario) {
         return userJpaRepository.findById(idUsuario).map(UserJpa::toEntity);
     }
 
+    /**
+     * Elimina un usuario de la base de datos utilizando una consulta nativa.
+     *
+     * @param user el usuario que se desea eliminar
+     */
     public void delete(User user) {
-        //userJpaRepository.delete(UserJpa.fromEntity(user));
-        //userJpaRepository.deleteById(user.getId());
-        //Query query = entityManager.createQuery("delete from UserJpa u where u.id = :id");
         Query query = entityManager.createNativeQuery(QUERY_DELETE_BY_ID);
         query.setParameter("id", user.getId());
         query.executeUpdate();

@@ -1,28 +1,304 @@
-/* main.css - Hoja de estilos global */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
+/* ==========================================================================
+   Ayu Theme Core Variables (Light Mode Default)
+   ========================================================================== */
+:root {
+    /* Color Palette - Ayu Light */
+    --bg-color: #FAFAFA;
+    --surface-color: #FFFFFF;
+    --surface-color-glass: rgba(255, 255, 255, 0.7);
+    --text-main: #5C6166;
+    --text-muted: #8A9199;
+    --border-color: rgba(0, 0, 0, 0.08);
+    
+    /* Accents */
+    --accent-primary: #FF9940;
+    --accent-primary-hover: #E68A39;
+    --accent-secondary: #55B4D4;
+    --accent-danger: #F07178;
+    --accent-success: #86B300;
+    --accent-warning: #FFB454;
+    
+    /* UI Elements */
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --border-radius: 16px;
+    --border-radius-sm: 10px;
+    
+    /* Overriding Bootstrap Defaults */
+    --bs-body-bg: var(--bg-color);
+    --bs-body-color: var(--text-main);
+    --bs-primary: var(--accent-primary);
+    --bs-primary-rgb: 255, 153, 64;
+    --bs-secondary: var(--accent-secondary);
+    --bs-danger: var(--accent-danger);
+    --bs-success: var(--accent-success);
+    --bs-warning: var(--accent-warning);
+    --bs-border-color: var(--border-color);
+    --bs-card-bg: var(--surface-color);
+}
+
+/* ==========================================================================
+   Ayu Theme Core Variables (Dark Mode)
+   ========================================================================== */
+[data-theme='dark'] {
+    /* Color Palette - Ayu Dark (Mirage) */
+    --bg-color: #0A0E14;
+    --surface-color: #151A21;
+    --surface-color-glass: rgba(21, 26, 33, 0.7);
+    --text-main: #CCCAC2;
+    --text-muted: #8A9199;
+    --border-color: rgba(255, 255, 255, 0.08);
+    
+    /* Accents */
+    --accent-primary: #FF8F40;
+    --accent-primary-hover: #E6813A;
+    --accent-secondary: #59C2FF;
+    --accent-danger: #F07178;
+    --accent-success: #91B362;
+    --accent-warning: #E6B450;
+    
+    /* UI Elements */
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
+    
+    /* Overriding Bootstrap Defaults */
+    --bs-body-bg: var(--bg-color);
+    --bs-body-color: var(--text-main);
+    --bs-primary: var(--accent-primary);
+    --bs-primary-rgb: 255, 143, 64;
+    --bs-border-color: var(--border-color);
+    --bs-card-bg: var(--surface-color);
+    --bs-tertiary-bg: var(--surface-color);
+}
+
+/* ==========================================================================
+   Global Styles
+   ========================================================================== */
 body {
-    background-color: #f8f9fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-primary-hover);
+}
+
+/* ==========================================================================
+   UI Components (Glassmorphism & Luxury Feel)
+   ========================================================================== */
+
+/* Navbar */
+.navbar-custom {
+    background: var(--surface-color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s ease;
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--accent-primary);
+    letter-spacing: -0.03em;
+}
+
+.navbar-custom .nav-link {
+    color: var(--text-main);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    transition: all 0.2s ease;
+}
+
+.navbar-custom .nav-link:hover, .navbar-custom .nav-link.active {
+    background-color: var(--border-color);
+    color: var(--accent-primary);
+}
+
+.navbar-text-welcome {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.navbar-text-welcome span {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Cards */
+.card, .contact-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
 .contact-card {
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-    background-color: white;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 24px;
+    margin-bottom: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-primary);
 }
 
-.navbar-custom {
-    background-color: #0d6efd;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px 24px;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
-.navbar-custom .navbar-brand, .navbar-custom .nav-link {
-    color: white;
+.card-header.bg-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-hover)) !important;
+    color: white !important;
+    border-bottom: none;
+}
+
+.card-header.bg-warning {
+    background: linear-gradient(135deg, var(--accent-warning), #F59E0B) !important;
+    color: #1F2430 !important;
+    border-bottom: none;
+}
+
+.card-header.bg-secondary {
+    background: linear-gradient(135deg, var(--text-muted), var(--text-main)) !important;
+    color: white !important;
+    border-bottom: none;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+}
+
+.btn-primary {
+    background-color: var(--accent-primary);
+    color: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(255, 153, 64, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 153, 64, 0.4);
+}
+
+[data-theme='dark'] .btn-primary {
+    color: #0A0E14;
+    box-shadow: 0 4px 10px rgba(255, 143, 64, 0.2);
+}
+
+.btn-outline-light {
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    background: transparent;
+}
+
+.btn-outline-light:hover {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+/* Forms */
+.form-control, .form-select {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: var(--border-radius-sm);
+    padding: 12px 16px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--surface-color);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 4px rgba(255, 153, 64, 0.15);
+    color: var(--text-main);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+/* List Groups */
+.list-group-item {
+    background-color: transparent;
+    border-color: var(--border-color);
+    color: var(--text-main);
+    padding: 16px 20px;
+}
+
+/* Utilities */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.title-accent {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+/* Alerts */
+.alert {
+    border-radius: var(--border-radius-sm);
+    border: none;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: rgba(134, 179, 0, 0.1);
+    color: var(--accent-success);
+    border-left: 4px solid var(--accent-success);
+}
+
+.alert-info {
+    background-color: rgba(85, 180, 212, 0.1);
+    color: var(--accent-secondary);
+    border-left: 4px solid var(--accent-secondary);
 }

@@ -2,18 +2,19 @@
 <html xmlns:th="http://thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Medios de Contacto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medios de Contacto - Agenda Premium</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
-            <a class="navbar-brand" href="#">Agenda Web</a>
+            <a class="navbar-brand" href="#">Agenda Premium</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/contacts}">Mis Contactos</a>
+                        <a class="nav-link" th:href="@{/contacts}">&larr; Volver al Directorio</a>
                     </li>
                 </ul>
             </div>
@@ -21,9 +22,9 @@
     </nav>
 
     <div class="container mt-5">
-        <div class="mb-4">
-            <h2>Medios de contacto para: <span th:text="${contacto.name + ' ' + contacto.lastName}"></span></h2>
-            <a th:href="@{/contacts}" class="btn btn-outline-secondary btn-sm">&larr; Volver a contactos</a>
+        <div class="mb-5 text-center">
+            <h2 class="title-accent mb-2">Medios de Contacto</h2>
+            <h4 class="text-main fw-light" th:text="${contacto.name + ' ' + contacto.lastName}"></h4>
         </div>
 
         <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -31,49 +32,58 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-        <div class="row">
-            <div class="col-md-5">
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white">Agregar Medio de Contacto</div>
-                    <div class="card-body">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 h-100">
+                    <div class="card-header bg-primary">
+                        Nuevo Medio de Contacto
+                    </div>
+                    <div class="card-body p-4">
                         <form th:action="@{/contacts/{id}/medios/save(id=${contacto.id})}" th:object="${nuevoMedio}" method="post">
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label class="form-label">Tipo de Contacto</label>
                                 <select class="form-select" th:field="*{idTipoContacto}" required>
-                                    <option value="" disabled selected>Seleccione un tipo...</option>
+                                    <option value="" disabled selected>Seleccione el tipo...</option>
                                     <option th:each="tipo : ${tiposContacto}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Valor (Número, Email, etc.)</label>
-                                <input type="text" class="form-control" th:field="*{valor}" required>
+                            <div class="mb-4">
+                                <label class="form-label">Valor (Ej. Teléfono, Email, URL)</label>
+                                <input type="text" class="form-control" th:field="*{valor}" required placeholder="Ingrese el valor">
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                            <button type="submit" class="btn btn-primary w-100 py-2">Registrar Medio</button>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-7">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-secondary text-white">Lista de Medios</div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center" th:each="medio : ${medios}">
-                            <div>
-                                <strong th:text="${medio.tipoContactoNombre}">Tipo</strong>: 
-                                <span th:text="${medio.valor}">Valor</span>
-                            </div>
-                            <div>
-                                <a th:href="@{/contacts/{idContacto}/medios/{idMedio}/edit(idContacto=${contacto.id}, idMedio=${medio.id})}" class="btn btn-sm btn-warning">Editar</a>
-                                <form th:action="@{/contacts/{idContacto}/medios/{idMedio}/delete(idContacto=${contacto.id}, idMedio=${medio.id})}" method="post" class="d-inline delete-form">
-                                    <button type="submit" class="btn btn-sm btn-danger">X</button>
-                                </form>
-                            </div>
-                        </li>
-                        <li class="list-group-item text-muted" th:if="${medios == null or medios.isEmpty()}">
-                            No hay medios registrados.
-                        </li>
-                    </ul>
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 h-100">
+                    <div class="card-header bg-secondary">
+                        Listado de Medios Registrados
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center py-3" th:each="medio : ${medios}">
+                                <div>
+                                    <span class="badge bg-primary me-2 px-3 py-2" th:text="${medio.tipoContactoNombre}">Tipo</span>
+                                    <span class="fs-5 fw-medium text-main" th:text="${medio.valor}">Valor</span>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <a th:href="@{/contacts/{idContacto}/medios/{idMedio}/edit(idContacto=${contacto.id}, idMedio=${medio.id})}" class="btn btn-sm btn-outline-warning">Editar</a>
+                                    <form th:action="@{/contacts/{idContacto}/medios/{idMedio}/delete(idContacto=${contacto.id}, idMedio=${medio.id})}" method="post" class="d-inline delete-form">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Quitar</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-center text-muted py-5" th:if="${medios == null or medios.isEmpty()}">
+                                <div>
+                                    <h5 class="fw-normal mb-1">Sin medios registrados</h5>
+                                    <p class="mb-0 fs-6">Agrega un teléfono, correo o red social a este contacto.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

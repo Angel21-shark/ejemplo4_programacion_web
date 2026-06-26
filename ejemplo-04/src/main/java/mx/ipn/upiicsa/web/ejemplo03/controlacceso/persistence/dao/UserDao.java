@@ -58,6 +58,7 @@ public class UserDao {
         //            .build()
         //).toList();
         Query query = entityManager.createNativeQuery(QUERY_FIND_ALL, Tuple.class);
+        @SuppressWarnings("unchecked")
         List<Tuple> resultados = query.getResultList();
         return resultados.stream().map(tuple -> User.builder()
                     .id(tuple.get("id_usuario",Integer.class))

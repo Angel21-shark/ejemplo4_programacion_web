@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Medio de Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">Agenda Web</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-warning text-dark">Editar Medio de Contacto para <span th:text="${contacto.name}"></span></div>
+                    <div class="card-body">
+                        <form th:action="@{/contacts/{id}/medios/{idMedio}/edit(id=${contacto.id}, idMedio=${medio.id})}" th:object="${medio}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de Contacto</label>
+                                <select class="form-select" th:field="*{idTipoContacto}" required>
+                                    <option th:each="tipo : ${tiposContacto}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Valor (Número, Email, etc.)</label>
+                                <input type="text" class="form-control" th:field="*{valor}" required>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/contacts/{id}/medios(id=${contacto.id})}" class="btn btn-secondary">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

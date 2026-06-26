@@ -55,6 +55,34 @@ public class MediosCtrl {
         return "redirect:/contacts/" + idContacto + "/medios";
     }
 
+    @GetMapping("/{idMedio}/edit")
+    public String edit(@PathVariable("idContacto") Integer idContacto, @PathVariable("idMedio") Integer idMedio, Model model, HttpSession session) {
+        if (!isUserAuthorized(session, idContacto)) return "redirect:/contacts";
+        
+        MedioContacto medio = medioContactoBs.getMedioById(idMedio);
+        if (medio == null || !medio.getIdContacto().equals(idContacto)) return "redirect:/contacts/" + idContacto + "/medios";
+        
+        model.addAttribute("contacto", contactsBs.getContactById(idContacto));
+        model.addAttribute("medio", medio);
+        model.addAttribute("tiposContacto", tipoContactoBs.getActiveTiposContacto());
+        
+        return "contacts/medios-edit";
+    }
+
+    @PostMapping("/{idMedio}/edit")
+    public String update(@PathVariable("idContacto") Integer idContacto, @PathVariable("idMedio") Integer idMedio, @ModelAttribute MedioContacto medioForm, HttpSession session, RedirectAttributes redirectAttributes) {
+        if (!isUserAuthorized(session, idContacto)) return "redirect:/contacts";
+        
+        MedioContacto medio = medioContactoBs.getMedioById(idMedio);
+        if (medio != null && medio.getIdContacto().equals(idContacto)) {
+            medio.setIdTipoContacto(medioForm.getIdTipoContacto());
+            medio.setValor(medioForm.getValor());
+            medioContactoBs.saveMedioContacto(medio);
+            redirectAttributes.addFlashAttribute("mensaje", "Medio actualizado correctamente");
+        }
+        return "redirect:/contacts/" + idContacto + "/medios";
+    }
+
     @PostMapping("/{idMedio}/delete")
     public String delete(@PathVariable("idContacto") Integer idContacto, @PathVariable("idMedio") Integer idMedio, HttpSession session, RedirectAttributes redirectAttributes) {
         if (!isUserAuthorized(session, idContacto)) return "redirect:/contacts";

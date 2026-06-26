@@ -13,9 +13,9 @@
     --border-color: rgba(0, 0, 0, 0.08);
     
     /* Accents */
-    --accent-primary: #FF9940;
-    --accent-primary-hover: #E68A39;
-    --accent-secondary: #55B4D4;
+    --accent-primary: #00C853;
+    --accent-primary-hover: #00B248;
+    --accent-secondary: #FF5252;
     --accent-danger: #F07178;
     --accent-success: #86B300;
     --accent-warning: #FFB454;
@@ -30,7 +30,7 @@
     --bs-body-bg: var(--bg-color);
     --bs-body-color: var(--text-main);
     --bs-primary: var(--accent-primary);
-    --bs-primary-rgb: 255, 153, 64;
+    --bs-primary-rgb: 0, 200, 83;
     --bs-secondary: var(--accent-secondary);
     --bs-danger: var(--accent-danger);
     --bs-success: var(--accent-success);
@@ -52,9 +52,9 @@
     --border-color: rgba(255, 255, 255, 0.08);
     
     /* Accents */
-    --accent-primary: #FF8F40;
-    --accent-primary-hover: #E6813A;
-    --accent-secondary: #59C2FF;
+    --accent-primary: #00E676;
+    --accent-primary-hover: #00C853;
+    --accent-secondary: #FF8A80;
     --accent-danger: #F07178;
     --accent-success: #91B362;
     --accent-warning: #E6B450;
@@ -67,7 +67,7 @@
     --bs-body-bg: var(--bg-color);
     --bs-body-color: var(--text-main);
     --bs-primary: var(--accent-primary);
-    --bs-primary-rgb: 255, 143, 64;
+    --bs-primary-rgb: 0, 230, 118;
     --bs-border-color: var(--border-color);
     --bs-card-bg: var(--surface-color);
     --bs-tertiary-bg: var(--surface-color);
@@ -217,18 +217,18 @@ a:hover {
 .btn-primary {
     background-color: var(--accent-primary);
     color: #FFFFFF;
-    box-shadow: 0 4px 10px rgba(255, 153, 64, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 200, 83, 0.3);
 }
 
 .btn-primary:hover {
     background-color: var(--accent-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(255, 153, 64, 0.4);
+    box-shadow: 0 6px 15px rgba(0, 200, 83, 0.4);
 }
 
 [data-theme='dark'] .btn-primary {
     color: #0A0E14;
-    box-shadow: 0 4px 10px rgba(255, 143, 64, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 230, 118, 0.2);
 }
 
 .btn-outline-light {
@@ -255,7 +255,7 @@ a:hover {
 .form-control:focus, .form-select:focus {
     background-color: var(--surface-color);
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 4px rgba(255, 153, 64, 0.15);
+    box-shadow: 0 0 0 4px rgba(0, 200, 83, 0.15);
     color: var(--text-main);
 }
 

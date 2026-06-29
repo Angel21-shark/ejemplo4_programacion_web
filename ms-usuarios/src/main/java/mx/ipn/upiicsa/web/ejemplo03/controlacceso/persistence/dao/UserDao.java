@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Data Access Object (DAO) para la gestión de persistencia de usuarios.
+ * Componente DAO encargado de la persistencia de los usuarios del sistema.
  * Utiliza Spring Data JPA y EntityManager para consultas nativas.
  */
 @Slf4j
@@ -30,7 +30,7 @@ public class UserDao {
     private static final String QUERY_DELETE_BY_ID = "delete from usuario where id_usuario = :id";
 
     /**
-     * Guarda un usuario en la base de datos.
+     * Almacena un nuevo registro de usuario en la base de datos.
      * 
      * @param user el usuario a guardar
      * @return el usuario guardado y mapeado de vuelta a entidad de negocio
@@ -42,7 +42,7 @@ public class UserDao {
     }
 
     /**
-     * Recupera todos los usuarios utilizando una consulta nativa y los mapea
+     * Obtiene la lista de todos los usuarios usando un query nativo y los mapea
      * utilizando objetos Tuple para evitar problemas de tipos de retorno genéricos.
      *
      * @return lista de usuarios recuperados de la base de datos

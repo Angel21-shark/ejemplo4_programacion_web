@@ -1,32 +1,40 @@
 #!/bin/bash
 
 echo "=========================================="
-echo "🚀 INICIANDO TU AGENDA PREMIUM"
+echo "🚀 INICIANDO ECOSISTEMA DE MICROSERVICIOS"
 echo "=========================================="
-echo "Preparando el servidor, por favor espera..."
-
-# Moverse a la carpeta del proyecto de Spring Boot
-cd ejemplo-04 || exit
-
-# Ejecutar Spring Boot en segundo plano
+echo "Levantando MS-Usuarios (Puerto 8081)..."
+cd ms-usuarios || exit
 mvn spring-boot:run &
-SPRING_PID=$!
+PID_USERS=$!
+cd ..
 
-echo "⏳ Compilando y levantando servicios... (esto puede tardar unos 10-15 segundos)"
+echo "Levantando MS-Contactos (Puerto 8082)..."
+cd ms-contactos || exit
+mvn spring-boot:run &
+PID_CONTACTS=$!
+cd ..
 
-# Esperar a que Spring Boot inicie (asumiendo que toma unos 15 segundos)
+echo "Levantando MS-Frontend (Puerto 8080)..."
+cd ms-frontend || exit
+mvn spring-boot:run &
+PID_FRONTEND=$!
+cd ..
+
+echo "⏳ Esperando a que todos los microservicios inicialicen (15 segundos)..."
 sleep 15
 
 echo "🌐 Abriendo la aplicación en tu navegador de Windows..."
-# En WSL, explorer.exe puede invocar URLs directamente
 if command -v explorer.exe &> /dev/null; then
     explorer.exe "http://localhost:8080"
 else
     xdg-open "http://localhost:8080" || echo "Abre http://localhost:8080 en tu navegador."
 fi
 
-echo "✅ ¡Todo listo! La aplicación está en ejecución."
-echo "⚠️  (Presiona Ctrl+C en esta terminal cuando desees apagar el servidor)"
+echo "✅ ¡Ecosistema Microservicios en ejecución!"
+echo "⚠️  (Presiona Ctrl+C en esta terminal para apagar todos los servidores)"
 
-# Esperar al proceso de Spring Boot para mantener la terminal activa
-wait $SPRING_PID
+# Atrapar la señal SIGINT (Ctrl+C) para matar a los tres
+trap "echo 'Apagando microservicios...'; kill $PID_USERS $PID_CONTACTS $PID_FRONTEND; exit" SIGINT
+
+wait $PID_USERS $PID_CONTACTS $PID_FRONTEND

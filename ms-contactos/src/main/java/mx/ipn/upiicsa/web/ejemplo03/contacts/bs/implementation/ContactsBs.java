@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Lógica de negocio (Service) para la gestión de Contactos.
+ * Servicio de negocio dedicado a procesar y manejar Contactos.
  * Maneja las reglas y sirve de puente entre los controladores y el DAO.
  */
 @Slf4j
@@ -22,7 +22,7 @@ public class ContactsBs {
     ContacsDao contacsDao;
 
     /**
-     * Obtiene la lista de contactos asociados a un usuario específico.
+     * Devuelve un listado completo de los contactos que pertenecen a un usuario.
      *
      * @param idUser el identificador del usuario propietario de los contactos
      * @return lista de contactos pertenecientes al usuario
@@ -32,7 +32,7 @@ public class ContactsBs {
     }
 
     /**
-     * Guarda o actualiza un contacto en la base de datos.
+     * Inserta un contacto nuevo o sobrescribe uno existente.
      *
      * @param contact la información del contacto a guardar
      * @return el contacto guardado y actualizado

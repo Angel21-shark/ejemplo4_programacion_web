@@ -1,0 +1,16 @@
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/App.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/bs/entity/User.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/bs/implementation/LoginBs.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/bs/implementation/UserBs.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/ctrl/LoginCtrl.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/ctrl/RegisterCtrl.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/ctrl/UsersCtrl.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/ctrl/dto/LoginDto.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/ctrl/dto/RegisterUserDto.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/ctrl/dto/UpdateUserDto.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/ctrl/dto/UserDto.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/persistence/dao/LoginDao.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/persistence/dao/UserDao.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/persistence/entity/UserJpa.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/controlacceso/persistence/repository/UserJpaRepository.java
+/home/vidruck/Desarrollo/ejemplo-04-01/ms-usuarios/src/main/java/mx/ipn/upiicsa/web/ejemplo03/security/AuthenticationFilter.java
